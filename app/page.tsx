@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import { initModals } from 'flowbite';
 import { useEffect, useState } from 'react';
+import Table from './table/page';
 
 export default function Home() {
   const [time, setTime] = useState<any>(null);
@@ -103,7 +104,7 @@ export default function Home() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     />
                   </svg>
-                  <span className="w-55    ml-2 text-[#ced5f5]">Loading time ...</span>
+                  <span className="w-55 ml-2 text-[#ced5f5]">Loading time ...</span>
                 </div>
               )}
             </span>
@@ -165,7 +166,7 @@ export default function Home() {
               Find out more ...
             </span>
           </button>
-
+Ï
           {/* Main modal */}
           <div
             id="default-modal"
@@ -245,6 +246,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <Table />
     </div>
   );
 }
