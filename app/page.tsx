@@ -230,14 +230,14 @@ export default function Home() {
                   <button
                     data-modal-hide="default-modal"
                     type="button"
-                    className="text-[#62e8d0] ease-in duration-200 transition-all bg-transparent hover:border font-bold leading-5 rounded-lg text-md px-4 py-2.5 inline-flex justify-center items-center"
+                    className="text-[#62e8d0] ease-in duration-150 transition-all bg-transparent hover:border font-bold leading-5 rounded-lg text-md px-4 py-2.5 inline-flex justify-center items-center"
                   >
                     I accept
                   </button>
                   <button
                     data-modal-hide="default-modal"
                     type="button"
-                    className="text-[#e30c22] ease-in duration-200 transition-all  hover:border focus:ring-2 shadow-xs font-bold leading-5 rounded-lg text-md px-4 py-2.5 focus:outline-none"
+                    className="text-[#e30c22] ease-in duration-150 transition-all  hover:border focus:ring-2 shadow-xs font-bold leading-5 rounded-lg text-md px-4 py-2.5 focus:outline-none"
                   >
                     Decline
                   </button>
