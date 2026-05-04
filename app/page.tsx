@@ -2,9 +2,25 @@
 
 import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
+import { initModals } from 'flowbite';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const notify = (message: string, size: number) => toast(message, {style: {width: size ? size + "px": "725px"}});
+  const [time, setTime] = useState<any>(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date().toUTCString());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const notify = (message: string, size: number) =>
+    toast(message, { style: { width: size ? size + 'px' : '725px' } });
+
+  useEffect(() => {
+    initModals();
+  }, []);
 
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -18,7 +34,7 @@ export default function Home() {
           priority
         />
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+          <h1 className="text-3xl font-semibold leading-15 tracking-tight text-black dark:text-zinc-50">
             To get started, edit the page.tsx file.
           </h1>
           <p className="max-w-md mb-8 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
@@ -49,8 +65,8 @@ export default function Home() {
             Documentation
           </a>
           <button
-            onClick={() => notify("This is an alert at : " + new Date().toUTCString(), 725)}
             className="relative inline-flex items-center
+              font-sans tabular-nums
             justify-center p-0.5 bg-linear-to-r
             from-cyan-500 to-blue-500 rounded-xl
             focus:ring-4 focus:outline-none focus:ring-blue-300
@@ -60,22 +76,38 @@ export default function Home() {
             "
           >
             <span
-              className="relative px-4 py-2.5 transition-all 
-              ease-in duration-125 bg-slate-900 
+              className="relative px-7 py-2.5 transition-all 
+              ease-in duration-150 bg-slate-900 
               rounded-xl hover:bg-transparent
               hover:dark:bg-transparent leading-5 font-bold"
             >
-              Check Alert !
+              {time || (
+                <div className="flex gap-2 items-center justify-center">
+                  <svg
+                    className="animate-spin h-5 w-5 text-[#0adefe]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-77"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  <span className="w-55    ml-2 text-[#ced5f5]">Loading time ...</span>
+                </div>
+              )}
             </span>
           </button>
-          <ToastContainer
-            position="top-left"
-            autoClose={1000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            draggable
-          />
         </div>
         <div
           id="alert-additional-content-1"
@@ -102,72 +134,115 @@ export default function Home() {
                 />
               </svg>
               <span className="sr-only">Info</span>
-              <h3 className="font-medium">This is a info alert</h3>
+              <h3 className="font-medium">This is a info page</h3>
             </div>
-            <button
-              type="button"
-              data-dismiss-target="#alert-additional-content-1"
-              aria-label="Close"
-              className="ms-auto -mx-1.5 -my-1.5 rounded-lg 
-              focus:ring-2 focus:cyan-600 hover:border-2 text-[#dd0000]
-              inline-flex items-center justify-center h-7 w-7 shrink-0"
-              onClick={() => notify("This is a message alert X " + new Date().toUTCString(), 800)}
-            >
-              <span className="sr-only">Close</span>
-              <svg
-                className="w-4 h-4"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="#dd0000"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="3"
-                  d="M6 18 17.94 6M18 18 6.06 6"
-                />
-              </svg>
-            </button>
           </div>
           <div className="mt-2 mb-4">
             More info about this info alert goes here. This example text is
             going to run a bit longer so that you can see how spacing within an
             alert works with this kind of content.
           </div>
+
+          {/* Modal toggle */}
           <button
+            data-modal-target="default-modal"
+            data-modal-toggle="default-modal"
+            className="relative inline-flex items-center
+            justify-center p-0.5 bg-linear-to-r
+            from-[#297dc8] to-[#07761f] rounded-xl
+            focus:ring-4 focus:outline-none focus:ring-blue-300
+            dark:focus:ring-blue-800
+            dark:text-white hover:text-white
+            hover:from-[#297dc8] hover:to-[#07761f]"
             type="button"
-            className="inline-flex items-center text-slate-200
-            bg-transparent hover:bg-slate-700 box-border border
-            border-teal-800 focus:ring-2 focus:ring-teal-600 
-            shadow-xs font-medium leading-5 rounded-md text-sm
-            px-3 py-1.5 focus:outline-none"
           >
-            <svg
-              className="w-4 h-4 me-1.5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
+            <span
+              className="relative px-4 py-2.5 transition-all 
+              ease-in duration-150 bg-slate-900 
+              rounded-xl hover:bg-transparent
+              hover:dark:bg-transparent leading-5 font-bold"
             >
-              <path
-                stroke="currentColor"
-                strokeWidth="2"
-                d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"
-              />
-              <path
-                stroke="currentColor"
-                strokeWidth="2"
-                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
-            </svg>
-            View more
+              Find out more ...
+            </span>
           </button>
+
+          {/* Main modal */}
+          <div
+            id="default-modal"
+            tabIndex={-1}
+            aria-hidden="true"
+            className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-2rem)] max-h-full"
+          >
+            <div className="relative w-full max-w-2xl max-h-full">
+              {/* Modal content */}
+              <div className="relative bg-[#0d0f0d] border-2 rounded-lg shadow-sm p-4 md:p-6">
+                {/* <!-- Modal header --> */}
+                <div className="flex items-center justify-between border rounded-lg p-2 md:p-3">
+                  <h3 className="text-lg font-medium text-heading">
+                    Terms of Service
+                  </h3>
+                  <button
+                    type="button"
+                    className="ease-in duration-150 transition-all bg-transparent hover:border-2 rounded-lg text-sm h-7 w-7 ms-auto inline-flex justify-center items-center"
+                    data-modal-hide="default-modal"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18 17.94 6M18 18 6.06 6"
+                      />
+                    </svg>
+                    <span className="sr-only">Close modal</span>
+                  </button>
+                </div>
+                {/* Modal body */}
+                <div className="space-y-4 md:space-y-6 py-4 md:py-6">
+                  <p className="leading-relaxed text-body">
+                    With less than a month to go before the European Union
+                    enacts new consumer privacy laws for its citizens, companies
+                    around the world are updating their terms of service
+                    agreements to comply.
+                  </p>
+                  <p className="leading-relaxed text-body">
+                    The European Union’s General Data Protection Regulation
+                    (G.D.P.R.) goes into effect on May 25 and is meant to ensure
+                    a common set of data rights in the European Union. It
+                    requires organizations to notify users as soon as possible
+                    of high-risk data breaches that could personally affect
+                    them.
+                  </p>
+                </div>
+                {/* Modal footer */}
+                <div className="flex items-center border-t border-default space-x-4 pt-4 md:pt-5">
+                  <button
+                    data-modal-hide="default-modal"
+                    type="button"
+                    className="text-[#62e8d0]  hover:border focus:ring-2 shadow-xs font-bold leading-5 rounded-lg text-md px-4 py-2.5 focus:outline-none"
+                  >
+                    I accept
+                  </button>
+                  <button
+                    data-modal-hide="default-modal"
+                    type="button"
+                    className="text-[#e30c22]  hover:border focus:ring-2 shadow-xs font-bold leading-5 rounded-lg text-md px-4 py-2.5 focus:outline-none"
+                  >
+                    Decline
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
