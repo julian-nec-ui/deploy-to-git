@@ -104,7 +104,9 @@ export default function Home() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     />
                   </svg>
-                  <span className="w-55 ml-2 text-[#ced5f5]">Loading time ...</span>
+                  <span className="w-55 ml-2 text-[#ced5f5]">
+                    Loading time ...
+                  </span>
                 </div>
               )}
             </span>
@@ -183,7 +185,7 @@ export default function Home() {
                   </h3>
                   <button
                     type="button"
-                    className="ease-in duration-150 transition-all bg-transparent hover:border-2 rounded-lg text-sm h-7 w-7 ms-auto inline-flex justify-center items-center"
+                    className="text-[#dd1122] ease-in duration-150 transition-all bg-transparent hover:border-2 rounded-lg text-sm h-7 w-7 ms-auto inline-flex justify-center items-center"
                     data-modal-hide="default-modal"
                   >
                     <svg
@@ -228,14 +230,14 @@ export default function Home() {
                   <button
                     data-modal-hide="default-modal"
                     type="button"
-                    className="text-[#62e8d0]  hover:border focus:ring-2 shadow-xs font-bold leading-5 rounded-lg text-md px-4 py-2.5 focus:outline-none"
+                    className="text-[#62e8d0] ease-in duration-200 transition-all bg-transparent hover:border font-bold leading-5 rounded-lg text-md px-4 py-2.5 inline-flex justify-center items-center"
                   >
                     I accept
                   </button>
                   <button
                     data-modal-hide="default-modal"
                     type="button"
-                    className="text-[#e30c22]  hover:border focus:ring-2 shadow-xs font-bold leading-5 rounded-lg text-md px-4 py-2.5 focus:outline-none"
+                    className="text-[#e30c22] ease-in duration-200 transition-all  hover:border focus:ring-2 shadow-xs font-bold leading-5 rounded-lg text-md px-4 py-2.5 focus:outline-none"
                   >
                     Decline
                   </button>
