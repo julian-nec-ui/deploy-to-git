@@ -166,7 +166,6 @@ export default function Home() {
               Find out more ...
             </span>
           </button>
-Ï
           {/* Main modal */}
           <div
             id="default-modal"
