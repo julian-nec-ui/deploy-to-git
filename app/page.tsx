@@ -2,8 +2,6 @@
 
 import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { conditions } from '../.next/dev/static/chunks/node_modules_next_dist_0rt-2cr._';
 
 export default function Home() {
   const notify = () => toast('hello');
