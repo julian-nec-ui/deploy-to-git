@@ -5,9 +5,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import { initModals } from 'flowbite';
 import { useEffect, useState } from 'react';
 import Table from './table/page';
+import ReactPlayer from 'react-player';
+import YouTube, { YouTubeProps } from 'react-youtube';
 
 export default function Home() {
   const [time, setTime] = useState<any>(null);
+
+  const options: YouTubeProps['opts'] = {
+    height: '390', // or 390
+    width: '640', // or 640
+    playerVars: {
+      autoplay: 1,
+      controls: 1,
+    },
+  };
+
+  const onPlayerReady: YouTubeProps['onReady'] = (event) => {
+    event.target.pauseVideo();
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -246,7 +261,25 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <YouTube
+          videoId="mJuz45RXeXY"
+          id="video"
+          opts={{options}}
+          onReady={(event) => onPlayerReady(event)}
+        />
+
+        {/* <div className="aspect-w-16 aspect-h-9">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/watch?v=t5vPNTC8SJI"
+            title="YouTube video player"
+            style={{border: 'none'}}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div> */}
       </main>
+
       <Table />
     </div>
   );
