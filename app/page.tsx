@@ -4,13 +4,9 @@ import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 import { initModals } from 'flowbite';
 import { useEffect, useState } from 'react';
-import Table from './table/page';
-import ReactPlayer from 'react-player';
 import YouTube, { YouTubeProps } from 'react-youtube';
-import YT, { Player } from '../node_modules/@types/youtube/index.d';
-import { ProfileMenu } from '@/components/ProfileMenu';
+import { Player } from '../node_modules/@types/youtube/index.d';
 import DropDown from '@/components/headless-ui/DropDown';
-import SelectBasic from '@/components/headless-ui/SelectBasic';
 
 export default function Home() {
 
@@ -21,7 +17,7 @@ export default function Home() {
 
   const [time, setTime] = useState<any | null>(null);
 
-  const [player, setPlayer] = useState<null>(null);
+  const [player, setPlayer] = useState<Player | null>(null);
 
   const options: YouTubeProps['opts'] = {
     height: 390, // or 390
@@ -52,22 +48,16 @@ export default function Home() {
   }, []);
 
   const handlePlay = () => {
-    if (player) {
-      (player as YT.Player).playVideo();
-    }
+      player?.playVideo();
   };
 
   const handlePause = () => {
-    if (player) {
-      (player as YT.Player).pauseVideo();
-    }
+      player?.pauseVideo();
   };
 
   const handlePLayFromBeginning = () => {
-    if (player) {
-      (player as YT.Player).seekTo(0, true);
-      (player as YT.Player).playVideo();
-    }
+      player?.seekTo(0, true);
+      player?.playVideo();
   };
 
   return (
