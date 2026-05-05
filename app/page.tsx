@@ -7,13 +7,17 @@ import { useEffect, useState } from 'react';
 import Table from './table/page';
 import ReactPlayer from 'react-player';
 import YouTube, { YouTubeProps } from 'react-youtube';
+import YT, { Player } from '../node_modules/@types/youtube/index.d';
 
 export default function Home() {
-  const [time, setTime] = useState<any>(null);
+
+  const [time, setTime] = useState<any | null>(null);
+
+  const [player, setPlayer] = useState<null>(null);
 
   const options: YouTubeProps['opts'] = {
-    height: '390', // or 390
-    width: '640', // or 640
+    height: 390, // or 390
+    width: 640, // or 640
     playerVars: {
       autoplay: 1,
       controls: 1,
@@ -22,6 +26,7 @@ export default function Home() {
 
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
     event.target.pauseVideo();
+    setPlayer(event.target);
   };
 
   useEffect(() => {
@@ -37,6 +42,18 @@ export default function Home() {
   useEffect(() => {
     initModals();
   }, []);
+
+  const handlePlay = () => {
+    if (player) {
+      (player as YT.Player).playVideo();
+    }
+  };
+
+  const handlePause = () => {
+    if (player) {
+      (player as YT.Player).pauseVideo();
+    }
+  };
 
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -261,25 +278,70 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <YouTube
-          videoId="mJuz45RXeXY"
-          id="video"
-          opts={{options}}
-          onReady={(event) => onPlayerReady(event)}
-        />
 
-        {/* <div className="aspect-w-16 aspect-h-9">
-          <iframe
-            className="w-full h-full"
-            src="https://www.youtube.com/watch?v=t5vPNTC8SJI"
-            title="YouTube video player"
-            style={{border: 'none'}}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+        <div className="relative flex items-center justify-between border w-full h-full p-6  border-[#15589b] rounded-lg">
+          <YouTube
+            videoId="mJuz45RXeXY"
+            id="video"
+            opts={{ options }}
+            onReady={(event) => onPlayerReady(event)}
           />
-        </div> */}
-      </main>
-
+          <div className="relative flex flex-row gap-2 sm:flex-col">
+            <button
+              className="relative bg-[#056EBE] text-white px-4.5 py-1 rounded-lg
+               border-b-4 border-[#6790CD]
+               transition-all duration-200 ease-in-out 
+               active:border-b-1 active:translate-y-1 
+               active:shadow-lg hover:bg-[#005EA5]"
+              onClick={handlePlay}
+            >
+              <span className="flex flex-row gap-1 justify-content-center items-center justify-content-evenly">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-4.5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
+                  />
+                </svg>
+                Play video
+              </span>
+            </button>
+            <button
+              className="relative bg-[#056EBE] text-white px-4.5 py-1 rounded-lg
+               border-b-4 border-[#6790CD]
+               transition-all duration-200 ease-in-out 
+               active:border-b-1 active:translate-y-1 
+               active:shadow-lg hover:bg-[#005EA5]"
+              onClick={handlePause}
+            >
+              <span className="flex flex-row gap-1 justify-content-center items-center justify-content-evenly">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-4.5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 5.25v13.5m-7.5-13.5v13.5"
+                  />
+                </svg>
+                Pause video
+              </span>
+            </button>
+          </div>
+        </div>
+      </main> 
       <Table />
     </div>
   );
