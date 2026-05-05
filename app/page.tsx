@@ -8,8 +8,16 @@ import Table from './table/page';
 import ReactPlayer from 'react-player';
 import YouTube, { YouTubeProps } from 'react-youtube';
 import YT, { Player } from '../node_modules/@types/youtube/index.d';
+import { ProfileMenu } from '@/components/ProfileMenu';
+import DropDown from '@/components/headless-ui/DropDown';
+import SelectBasic from '@/components/headless-ui/SelectBasic';
 
 export default function Home() {
+
+  const videos = [
+    "mJuz45RXeXY",
+    "tVBZq2fq-WA"
+  ]
 
   const [time, setTime] = useState<any | null>(null);
 
@@ -52,6 +60,13 @@ export default function Home() {
   const handlePause = () => {
     if (player) {
       (player as YT.Player).pauseVideo();
+    }
+  };
+
+  const handlePLayFromBeginning = () => {
+    if (player) {
+      (player as YT.Player).seekTo(0, true);
+      (player as YT.Player).playVideo();
     }
   };
 
@@ -281,17 +296,17 @@ export default function Home() {
 
         <div className="relative flex items-center justify-between border w-full h-full p-6  border-[#15589b] rounded-lg">
           <YouTube
-            videoId="mJuz45RXeXY"
+            videoId={videos[0]}
             id="video"
             opts={{ options }}
             onReady={(event) => onPlayerReady(event)}
           />
-          <div className="relative flex flex-row gap-2 sm:flex-col">
+          <div className="relative flex flex-col gap-2">
             <button
               className="relative bg-[#056EBE] text-white px-4.5 py-1 rounded-lg
                border-b-4 border-[#6790CD]
                transition-all duration-200 ease-in-out 
-               active:border-b-1 active:translate-y-1 
+               active:border-b active:translate-y-1 
                active:shadow-lg hover:bg-[#005EA5]"
               onClick={handlePlay}
             >
@@ -310,14 +325,14 @@ export default function Home() {
                     d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"
                   />
                 </svg>
-                Play video
+                Play
               </span>
             </button>
             <button
               className="relative bg-[#056EBE] text-white px-4.5 py-1 rounded-lg
                border-b-4 border-[#6790CD]
                transition-all duration-200 ease-in-out 
-               active:border-b-1 active:translate-y-1 
+               active:border-b active:translate-y-1 
                active:shadow-lg hover:bg-[#005EA5]"
               onClick={handlePause}
             >
@@ -328,7 +343,7 @@ export default function Home() {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="size-4.5"
+                  className="size-5"
                 >
                   <path
                     strokeLinecap="round"
@@ -336,13 +351,40 @@ export default function Home() {
                     d="M15.75 5.25v13.5m-7.5-13.5v13.5"
                   />
                 </svg>
-                Pause video
+                Pause
+              </span>
+            </button>
+            <button
+              className="relative bg-[#056EBE] text-white px-4.5 py-1 rounded-lg
+               border-b-4 border-[#6790CD]
+               transition-all duration-200 ease-in-out 
+               active:border-b active:translate-y-1 
+               active:shadow-lg hover:bg-[#005EA5]"
+              onClick={handlePLayFromBeginning}
+            >
+              <span className="flex flex-row gap-1 justify-content-center items-center justify-content-evenly">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+                Replay
               </span>
             </button>
           </div>
+          <DropDown />
         </div>
-      </main> 
-      <Table />
+        
+      </main>
     </div>
   );
 }

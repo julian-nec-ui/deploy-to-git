@@ -1,6 +1,7 @@
-import type { NextConfig } from 'next'
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  
   // basePath: '/deploy-to-git',
   // assetPrefix: '/deploy-to-git' // Ensures assets load from the subfolder
   // async headers () {
@@ -38,4 +39,4 @@ const nextConfig: NextConfig = {
   // }
 }
 
-export default nextConfig
+export default nextConfig;

@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "components/ProfileMenu.jsx", "components/headless-ui/DropDown.jsx", "components/headless-ui/SelectBasic.jsx"  ],
   "exclude": ["node_modules"]
 }
