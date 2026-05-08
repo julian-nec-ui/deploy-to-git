@@ -1,5 +1,58 @@
 @import "tailwindcss";
 
+.icon:hover {
+  fill: #DA4567;
+}
+
+/* @keyframes bounceToRight {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(100px); }
+  100% { transform: translateX(0); }
+} */
+
+/* .svg {
+  animation: bounceToRight 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.svgbnc {
+  animation: bounceToRight 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+} */
+
+/* .bounce-right {
+  transition: transform 0.1s ease-in-out;
+} */
+
+/* .bounce-right:hover {
+  animation: bounceToRight 0.6s ease-in-out;
+} */
+
+/* @keyframes bounceToRight {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+} */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  cursor: pointer;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 130px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 
 :root {
   --background: #ffffff;

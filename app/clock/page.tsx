@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function Clock() {
-  const [time, setTime] = useState<any>(null);
+  const [time, setTime] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
